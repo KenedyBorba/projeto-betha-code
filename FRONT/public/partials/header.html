@@ -1,0 +1,46 @@
+<nav ng-controller="HeaderCtrl" class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle collapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a href="/home" class="navbar-brand">Agenda de serviços</a>-->
+            <a href="" ng-click="navigate()" class="navbar-brand" style="padding-top: 16px; font-size: 20px;">Agenda de serviços</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <!--<ul class="nav navbar-nav">
+                <li ng-class="{ active: isActive('/home')}"><a href="/home">Home</a></li>
+                <li class="dropdown">-->
+
+            <!--usar esse exemplo para separar se a pessoa é admin-->
+            <ul class="nav navbar-nav" ng-if="isAuthenticated()">
+                <li ng-class="{ active: isActive('/home')}" ng-if="isAuthenticated()"><a href="/home">Home</a></li>
+                <li class="dropdown" ng-if="isAuthenticated()">
+
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-if="isAuthenticated()">Cadastros <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li style="height:40px;"><a style="height:40px; font-size: 16px;" href="/pessoa-fisica"><i
+                                    class="fa fa-male" aria-hidden="true"></i> Pessoa Fisica</a></li>
+                        <li style="height:40px;"><a style="height:40px; font-size: 16px;" href="/pessoa-juridica"><i
+                                    class="fa fa-briefcase" aria-hidden="true"></i> Pessoa Juridica</a></li>
+                        <li style="height:40px;"><a style="height:40px; font-size: 16px;" href="/servico"><i
+                                    class="fa fa-wrench" aria-hidden="true"></i> Serviços</a></li>
+                    </ul>
+                </li>
+                <li ng-class="{ active: isActive('/agenda')}" ng-if="isAuthenticated()"><a href="/agenda">Agenda</a></li>
+            </ul>
+            <ul ng-if="isAuthenticated()" class="nav navbar-nav navbar-right">
+                <li><a href="#" ng-click="logout()" }>Logout</a></li>
+            </ul>
+            <ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
+                <li ng-class="{ active: isActive('/login')}"><a href="/login">Log in</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

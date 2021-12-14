@@ -1,0 +1,114 @@
+<head>
+    <link rel="stylesheet" href="/css/fullcalendar.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href='/css/select2.min.css' />
+    <link rel="stylesheet" href='/css/bootstrap-datetimepicker.min.css' />
+    <link rel="stylesheet" href="/css/calendar/main.css">
+</head>
+
+<div ng-controller="AgendamentoController as vm">
+    <div id="divPrincipal" style="position: absolute; z-index: 3;">
+    </div>
+    <div class="container">
+        <div class="panel">
+            <div class="panel-body">
+                <div id="calendar"></div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Adicionando Evento</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="titulo" class="col-sm-2">Titulo</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control text-left" ng-model="vm.agendamento.titulo" id="nome">
+                                </div>
+                            </div>
+
+                            <!--criar o campo da empresa -->
+                            <div class="form-group">
+                                <label for="empresa" class="col-sm-2">Empresa</label>
+                                <div class="col-sm-8" ng-controller="PessoaJuridicaListController as empVm">
+                                    <select name="empresa" ng-model="vm.agendamento.pessoaJuridica._id" class="form-control" id="empresa">
+                                        <option ng-repeat="item in empVm.itens" value="{{item._id}}">{{item.nomeFantasia}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!--criar o campo do serviço -->
+                            <div class="form-group">
+                                <label for="servico" class="col-sm-2">Serviço</label>
+                                <div class="col-sm-8" ng-controller="ServicoListController as servVm">
+                                    <select name="servico" ng-model="vm.agendamento.servico._id" class="form-control" id="servico">
+                                        <option ng-repeat="item in servVm.itens" value="{{item._id}}">{{item.descricao}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profissional" class="col-sm-2">Cor </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="vm.agendamento.backgroundColor">
+                                        <option value="#4682B4">Azul</option>
+                                        <option value="#FFD700">Amarelo</option>
+                                        <option value="#363636">Cinza</option>
+                                        <option value="#FF8C00">Laranja</option>
+                                        <option value="#000000">Preto</option>
+                                        <option value="#8B008B">Roxo</option>
+                                        <option value="#FF00FF">Rosa</option>
+                                        <option value="#FF5733">Vermelho</option>
+                                        <option value="#32CD32">Verde</option>                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="start" class="col-sm-2">Inicio</label>
+                                <div class="col-sm-8">
+                                    <input type="datetime-local" class="form-control text-left" ng-model="vm.agendamento.start" id="start">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="end" class="col-sm-2">Fim</label>
+                                <div class="col-sm-8">
+                                    <input type="datetime-local" class="form-control text-left" ng-model="vm.agendamento.end" id="end">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" confirmed-click="vm.excluirAgendamento()" ng-confirm-click="Deseja excluir a agendamento?">Excluir</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" ng-click="vm.salvar()" data-dismiss="modal">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $('#bsalert').on('close.bs.alert', toggleAlert)
+
+    function toggleAlert() {
+        $(".alert").toggleClass('in out');
+        return false; // Keep close.bs.alert event from removing from DOM
+    }
+</script>
+
+<script src="/js/lib/moment.min.js"></script>
+<script src="/js/lib/fullcalendar.min.js"></script>
+<script src="/js/lib/select2.min.js"></script>
+<script src="/js/lib/bootstrap-datetimepicker.min.js"></script>

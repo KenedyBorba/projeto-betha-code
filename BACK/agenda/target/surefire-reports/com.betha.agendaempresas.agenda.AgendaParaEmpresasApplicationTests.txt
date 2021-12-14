@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.betha.agendaempresas.agenda.AgendaParaEmpresasApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 18.051 s <<< FAILURE! - in com.betha.agendaempresas.agenda.AgendaParaEmpresasApplicationTests
+contextLoads  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'agendaController': Unsatisfied dependency expressed through field 'repository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'agendaRepository' defined in com.betha.agendaempresas.agenda.repository.AgendaRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Did not find a query class com.betha.agendaempresas.agenda.model.QAgenda for domain class com.betha.agendaempresas.agenda.model.Agenda!
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'agendaRepository' defined in com.betha.agendaempresas.agenda.repository.AgendaRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Did not find a query class com.betha.agendaempresas.agenda.model.QAgenda for domain class com.betha.agendaempresas.agenda.model.Agenda!
+Caused by: java.lang.IllegalArgumentException: Did not find a query class com.betha.agendaempresas.agenda.model.QAgenda for domain class com.betha.agendaempresas.agenda.model.Agenda!
+Caused by: java.lang.ClassNotFoundException: com.betha.agendaempresas.agenda.model.QAgenda
+
